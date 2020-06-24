@@ -3,3 +3,4 @@ playing badminton is my hobby.
 adding new line from abcd brach.
 =======
 >>>>>>> master
+adding 2nd line from abcd branch.
