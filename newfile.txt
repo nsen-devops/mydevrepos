@@ -1,2 +1,5 @@
 playing badminton is my hobby.
+<<<<<<< HEAD
 adding new line from abcd brach.
+=======
+>>>>>>> master
