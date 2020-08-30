@@ -1,0 +1,16 @@
+#!/bin/bash
+for i in `cat live.txt`
+do
+OS=`ssh $i uname`
+if [ $OS = SunOS ]
+then
+scp -q account_info.solaris $i:/var/tmp
+ssh $i /var/tmp/account_info.solaris
+ssh $i cat /var/tmp/account_expire.csv >> account_expire_Solaris.csv
+elif [ $OS = Linux ]
+then
+scp -q account_info.linux $i:/var/tmp
+ssh $i /var/tmp/account_info.linux
+ssh $i cat /var/tmp/account_expire.csv >> account_expire_Linux.csv
+fi
+done

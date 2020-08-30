@@ -1,0 +1,438 @@
+https://en.wikibooks.org/wiki/Bash_Shell_Scripting
+
+Create folders and files
+mkdir work
+cd work
+mkdir dummy_folder1 dummy_folder2 dummy_folder3 dummy_folder4
+for dir in dummy_folder1 dummy_folder2 dummy_folder3 dummy_folder4
+do
+for file in dummy_file1 dummy_file2 dummy_file3 dummy_file4
+do
+echo "The file $file exists under $dir" >> $dir/$file
+done
+done
+
+1. Delete files
+
+cat > delete_files.sh << EOF
+#!/bin/bash
+# this script deletes some files
+cp * trash
+rm -rf trash
+mkdir trash
+echo "Deleted all files!"
+EOF
+chmod +x delete_files.sh
+
+2. Example Variable
+
+cat > hello.sh << EOF
+#!/bin/bash
+STR="Hello World!"
+echo $STR
+EOF
+chmod +x hello.sh
+
+3. Expansion/Substitution
+echo `uname -n`
+echo $(uname -n)
+echo $PWD
+touch book boot ball boat apple orange grapes guava
+ls b{ook,oot,all}
+echo $(( 8*8 ))
+echo "bo*"
+
+en=EasyNomad
+en=${en}Travel
+echo $en
+
+echo "${#en}"
+
+4. Read command
+
+vi read.sh
+#!/bin/bash
+echo -n "Enter name of file to delete: "
+read file
+echo "Type 'y' to remove it, 'n' to change your mind ... "
+rm -i $file
+echo "That was YOUR decision!"
+
+chmod +x read.sh
+
+5. Command Substitution
+LIST=`ls`
+echo $LIST
+
+PS1="`pwd`>"
+
+LIST=$(ls)
+echo $LIST
+
+touch test1.tmp test2.tmp test3.tmp
+rm $( find ~/work -name “*.tmp” )
+
+vi backup.sh
+#!/bin/bash
+BCKUP=/home/murali/backup-$(date +%d-%m-%y).tar.gz
+tar -czf $BCKUP $HOME
+
+chmod +x backup.sh
+
+6. Arithmetic evaluation
+
+let X=10+2*7
+echo $X
+let Y=X+2*4
+echo $Y
+
+echo "$((123+20))"
+VALUE=$[123+20]
+echo "$[123*$VALUE]"
+
+7. Arithmetic
+
+vi arithmetic.sh
+
+#!/bin/bash
+echo -n "Enter the first number: "
+read x
+echo -n "Enter the second number: "
+read y
+add=$(( $x + $y )) 
+sub=$(( $x - $y )) 
+mul=$(( $x * $y )) 
+div=$(( $x / $y )) 
+mod=$(( $x % $y ))
+echo "Sum: $add"
+echo "Difference: $sub"
+echo "Product: $mul"
+echo "Quotient: $div"
+echo "Remainder: $mod"
+
+chmod +x arithmetic.sh
+
+8. Parameters
+
+echo $?
+echo $-
+echo $!
+echo $$
+echo $PPID
+echo $ERRNO
+echo $*
+echo $#
+
+9. Conditions
+
+vi condition.sh
+#!/bin/bash
+DIST=$(grep -w ID /etc/os-release|awk -F'=' '{print $2}' | sed 's/\"//g')
+if [[ $DIST == "centos" ]];
+then
+  echo "You are using CentOS Linux"
+elif [[ $DIST == "ubuntu" ]];
+then
+  echo "You are using Ubuntu Linux"
+elif [[ $DIST == "rhel" ]]
+then
+  echo "You are using RedHat Linux"
+else
+  echo "I'm sorry, not sure of what Linux OS you are using"
+fi
+
+chmod +x condition.sh
+
+10. Comparison
+
+vi comparison.sh
+#!/bin/bash
+if [ -f /etc/fstab ];
+then
+  cp /etc/fstab ~
+  echo “Done.”
+else
+  echo “This file does not exist.”
+  exit 1
+fi
+
+chmod +x comparison.sh
+
+11. Comparison expression
+
+vi comp1.sh
+#!/bin/bash
+echo -n "Enter a number 1 < x < 10:"
+read num
+if [ "$num" -gt 1 –a "$num" -lt 10 ]
+then
+  echo "$num * $num = $(( $num * $num ))"
+else
+  echo "Wrong insertion !"
+fi
+
+chmod +x comp1.sh
+
+vi comp2.sh
+#!/bin/bash
+echo -n "Enter a number 1 < x < 10: "
+read num
+if [[ "$num" -gt 1 ]] && [[ "$num" -lt 10 ]]
+then 
+  echo "$num*$num=$(($num*$num))"
+else
+  echo "Wrong insertion !"
+fi
+
+12. Shell parameters
+
+vi shellparams.sh
+#!/bin/bash
+echo "$#; $0; $1; $2; $*; $@"
+
+#!/bin/bash
+echo "Total numer of arguments passed: $#"
+echo "Executable: $0"
+echo "First argument passed: $1"
+echo "Second argument passed: $2"
+echo "All arguments passed: $*"
+echo "Once again, all arguments passed: $@"
+
+chmod +x shellparams.sh
+./shellparams.sh arg1 arg2 arg3
+
+
+
+13. Case statement
+
+vi case_script.sh
+#!/bin/bash
+echo -n "Enter a number 1 < x < 10: "
+read x 
+case $x in
+	1) echo "Value of x is 1.";;
+	2) echo "Value of x is 2.";;
+	3) echo "Value of x is 3.";;
+	4) echo "Value of x is 4.";;
+	5) echo "Value of x is 5.";;
+	6) echo "Value of x is 6.";;
+	7) echo "Value of x is 7.";;
+	8) echo "Value of x is 8.";;
+	9) echo "Value of x is 9.";;
+	0 | 10) echo "wrong number.";;
+	*) echo "Unrecognized value.";;
+esac 
+
+#!/bin/bash
+DIST=$(grep -w ID /etc/os-release|awk -F'=' '{print $2}' | sed 's/\"//g')
+
+case $DIST in
+  'centos')
+           echo "You are using CentOS Linux"
+           ;;
+  'ubuntu')
+           echo "You are using Ubuntu Linux"
+           ;;
+  'rhel')
+           echo "You are using RedHat Linux"
+           ;;
+  *)
+           echo "I'm sorry, not sure of what Linux OS you are using"
+           ;;
+esac
+
+chmod +x case_script.sh
+
+14. Iterators - for
+
+vi for_script1.sh
+#!/bin/bash
+let sum=0
+for num in 1 2 3 4 5
+do
+  let "sum = $sum + $num"
+done
+echo $sum
+
+chmod +x for_script1.sh
+
+echo {1..20}
+
+for (( i = 1 ; i <= 20 ; ++i )) ; do
+  echo $i
+done
+
+vi for_script2.sh
+#!/bin/bash
+for x in paper pencil pen
+do
+  echo "The value of variable x is: $x"
+  sleep 1
+done
+chmod +x for_script2.sh
+
+vi for_script3.sh
+#!/bin/bash
+for x
+do
+  echo "The value of variable x is: $x"
+  sleep 1
+done
+
+15. Iterators - while
+
+vi while_script1.sh
+#!/bin/bash
+echo –n "Enter a number: "
+read x
+let sum=0; let i=1
+while [ $i –le $x ]
+do
+  let "sum = $sum + $i"
+  i=$i+1
+done
+echo "the sum of the first $x numbers is: $sum"
+
+chmod +x while_script1.sh
+
+vi while_continue_break.sh
+#!/bin/bash 
+LIMIT=19
+echo 
+echo "Printing Numbers 1 through 20 (but not 3 and 11)"
+a=0
+while [ $a -le "$LIMIT" ]
+do
+  a=$(($a+1))
+  if [ "$a" -eq 3 ] || [ "$a" -eq 11 ]
+  then
+    continue
+  elif [ $a -eq 5 ]
+  then
+    break
+  fi
+  echo -n "$a"
+done
+
+chmod +x while_continue_break.sh
+
+16. Iterators - until
+
+vi until_script.sh
+#!/bin/bash
+echo "Enter a number: "
+read x
+echo ; echo "Count Down"
+until [ "$x" -le 0 ]
+do
+echo $x 
+  x=$(($x - 1))
+  sleep 1
+done
+echo
+echo "GO!"
+
+chmod +x until_script.sh
+
+#!/bin/bash
+Str="Learn Bash Commands from UbuntuPit"
+subStr=${Str:0:20}
+echo $subStr
+
+#!/bin/bash
+Str="Learn Bash Commands from UbuntuPit"
+#subStr=${Str:0:20}
+
+subStr=$(echo $Str| cut -d ' ' -f 1-3)
+echo $subStr
+
+#!/bin/bash
+ROOT_UID=0
+
+if [ "$UID" -eq "$ROOT_UID" ]
+then
+echo "You are root."
+else
+echo "You are not root"
+fi
+exit 0
+
+#!/bin/bash
+
+echo -n "Enter Filename-> "
+read filename
+if [ -f "$filename" ]; then
+sort $filename | uniq | tee sorted.txt
+else
+echo "No $filename in $pwd...try again"
+fi
+exit 0
+
+
+
+17. Functions
+
+vi function.sh
+#!/bin/bash
+hello() {
+echo "You are in function hello()"
+} 
+
+echo "Calling function hello()…"
+hello
+echo "You are now out of function hello()"
+
+chmod +x function.sh
+
+df -hP |egrep -v 'Filesystem|cdrom|tmpfs|shmfs' | awk '{print int($5)}'
+df -hP |egrep -v 'Filesystem|cdrom|tmpfs|shmfs' | awk '{print 0+$5}'
+df -hP |egrep -v 'Filesystem|cdrom|tmpfs|shmfs' | awk '0+$5 >= 10 {print $5}'
+df -hP |egrep -v 'Filesystem|cdrom|tmpfs|shmfs' | awk '0+$5 >= 10 {print $6" - "$5}'
+
+
+function check_filesystems() {
+# Check if any of the filesystems exceed 80% usage and report if exist
+fs_more_than_80_percent=$(df -hP | egrep -v 'Filesystem|cdrom|tmpfs|shmfs' | awk '0+$5 >= 80 {print}' | wc -l)
+if [[ "${fs_more_than_80_percent}" -gt 0 ]]
+then
+  fs_array=( $(df -hP |egrep -v 'Filesystem|cdrom|tmpfs|shmfs' | sort | awk '0+$5 >= 80 {print $6}'))
+  fs_pers_array=( $(df -hP |egrep -v 'Filesystem|cdrom|tmpfs|shmfs' | sort | awk '0+$5 >= 80 {print $5}'))
+fi
+} # End of check_filesystems function
+
+if [[ "${fs_more_than_80_percent}" -gt 0 ]]
+then
+  echo "Filesystems having more than 80% Usage"
+  for (( i=0; i<${#fs_array[@]}; i++ ))
+  do
+    echo "${fs_array[i]}"
+    echo "${fs_pers_array[i]}"
+  done
+fi
+
+cat > studies.txt
+"Saraswati Vidya Mandir","Queen Marie's College","Mumbai"
+"Peace On Green Earth","Peter's College","Chennai"
+"Kendriya Vidyalaya","MGM College","Udupi"
+"Nittur High School","PPC College","Mangalore"
+
+
+array=( abc bcd efg fgh stu tuv xyz ) # declare an array
+echo ${#array[@]} # Print number of array elements
+echo ${array[0]} # print first element of array
+echo ${#array[0]} # print number of characters in first element
+echo ${array[1]} # print 2nd element
+echo ${array[2]} # print 3rd element
+echo ${array[@]:2} # print 3rd element to last element of the array
+echo ${array[@]:3} # print 4th element to last element of the array
+echo ${array[0]:1} # print 2nd to last character of first element
+echo ${array[0]:2} # print from 3rd to last character of first element
+echo ${array[0]:0} # print all characters of 1st element of the array
+echo ${array[@]:1:3} # print 3 elements from 2nd element of the array
+echo ${array[@]:2:2} # print 2 elements from 3rd element of the array
+echo ${array[@]:0} # Same as without :0
+
+function second_version_high() {
+test "$(echo "$@" | tr " " "\n" | sort -rV | head -n 1)" != "$1";
+}
+

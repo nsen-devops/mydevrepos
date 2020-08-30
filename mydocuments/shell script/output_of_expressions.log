@@ -1,0 +1,73 @@
+[root@xyz ~]# cat file1.txt
+This is a singer.
+he is an engineer
+3 people are cleaver
+You are not a part of parliament
+I think in the 5 people, he would not go pune.
+Chandigarh is a good city
+Can you suggest me from where is can start to learn python programming
+Villagers are more hard workers than city people
+Modi is the PM of INDIA
+Total members in loksabha is 545
+Total members in rajhasabha is 245
+This is my 12th line
+13 end
+
+[root@xyz ~]# grep '^C' file1.txt
+Chandigarh is a good city
+Can you suggest me from where is can start to learn python programming
+
+[root@xyz ~]# grep 'r$' file1.txt
+he is an engineer
+3 people are cleaver
+
+[root@xyz ~]# grep 'A$' file1.txt
+Modi is the PM of INDIA
+
+[root@xyz ~]# grep '.' file1.txt
+This is a singer.
+he is an engineer
+3 people are cleaver
+You are not a part of parliament
+I think in the 5 people, he would not go pune.
+Chandigarh is a good city
+Can you suggest me from where is can start to learn python programming
+Villagers are more hard workers than city people
+Modi is the PM of INDIA
+Total members in loksabha is 545
+Total members in rajhasabha is 245
+This is my 12th line
+13 end
+
+[root@xyz ~]# grep '[0-9]' file1.txt
+3 people are cleaver
+I think in the 5 people, he would not go pune.
+Total members in loksabha is 545
+Total members in rajhasabha is 245
+This is my 12th line
+13 end
+
+[root@xyz ~]# grep '^[0-9]' file1.txt
+3 people are cleaver
+13 end
+
+[root@xyz ~]# grep '[0-9]$' file1.txt
+Total members in loksabha is 545
+Total members in rajhasabha is 245
+
+[root@xyz ~]# grep '^[a-z]' file1.txt
+he is an engineer
+
+[root@xyz ~]# grep '^[a-z, A-Z]' file1.txt
+This is a singer.
+he is an engineer
+You are not a part of parliament
+I think in the 5 people, he would not go pune.
+Chandigarh is a good city
+Can you suggest me from where is can start to learn python programming
+Villagers are more hard workers than city people
+Modi is the PM of INDIA
+Total members in loksabha is 545
+Total members in rajhasabha is 245
+This is my 12th line
+[root@xyz ~]#

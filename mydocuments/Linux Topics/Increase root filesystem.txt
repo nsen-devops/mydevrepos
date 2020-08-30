@@ -1,0 +1,31 @@
+Go to trubleshooting 
+
+
+reboot 
+==> press e 
+==> ctrl+c 
+==> Now you are in grub mode write (exit) 
+===> you can select any mode troubleshooting,resue mode or install os
+
+Select troubleshooting
+now select continue option
+now you in sh>
+fdisk -l    to check the partition
+lsblk   to check the free partition
+create  pv of free partition
+add pv into that vg where root lv built    using pvcreate pv1 /dev/sdc1   <-- for eg.
+extend vg          using vgextend vgname pvpath(dev/sdc1)   <--  for eg.
+now you can check vg space      using   vgs
+
+Now you extend the root partition means extend the root lv.
+So first we check the PE means Physical extents by using       vgdisplay 
+in the last 2nd or 3rd line you will find 
+
+free pe / size   so in the lvextend time you will write (+pe) value instead the size of disk.
+it is most important:--
+
+Now by using    lvextend -l +pevalue pathoflv -r        {-r means resizes the filesystem too}
+
+exit         
+
+now it will take some time and you system will reboot.
