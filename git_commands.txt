@@ -33,4 +33,4 @@ Basic commands of GitHub
 31.	#git branch --merged
 32.	#git branch -D Branch1 : To delete the branch locally 
 33.	#git push <repo name>  --delete Branch1 : To delete the branch remote server.
-
+34. #alias graph='git log --all --decorate --oneline --graph'
