@@ -1,7 +1,8 @@
 Commands use in Vagrant:
 # vagrant init            ----------------- to intialize the Vagrantfile.
 # cat Vagrantfile  -------------------  ( Add the below configuration to create two virtual machine ).
-# vagrant up <virtual machine name>   -----------  To start the virtual machine.     
+# vagrant up <virtual machine name>   -----------  To start the virtual machine.   
+# vagrant global-status
 # vagrant reload  <virtual machine name>     -------------------    To apply the new changes as per config file (this command will restart your machine).
 # vagrant halt  <virtual machine name>         ----------  To stop the vagrant machine.
 # vagrant suspend  ------------- suspends the virtual machine  
