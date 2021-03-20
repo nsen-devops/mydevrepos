@@ -4,9 +4,9 @@
 # systemctl status docker
 # systemctl start docker
 # systemctl status docker
-# docker ps   ------------------------------This command will show running images info.
+# docker ps   ------------------------------This command will show running containers info.
 # docker --help
-# docker ps -a   --------------------------This command will show all images created so far
+# docker ps -a   --------------------------This command will show all containers created so far
 # docker search --help
 # docker search image
 # docker run -it docker.io/jenkins    
@@ -24,8 +24,8 @@ RUN yum install -y httpd
   996  docker images
   997  docker run 8e31f4452df3
  1000  docker run -it 8e31f4452df3
-# docker ps -q ------------ This command will show you the running images ID
-# docker ps -qa              ----------------Command will show all container image ID
+# docker ps -q ------------ This command will show you the running container ID
+# docker ps -qa              ----------------Command will show all container ID
 # docker inspect <container id>   ------------ to get the ip and details of container.
 
 [root@machine1 dockerbuild]# docker rm -f $(docker ps -q)              ------------------------------ Command to remove the all running container
