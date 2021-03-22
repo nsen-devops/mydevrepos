@@ -28,6 +28,14 @@ RUN yum install -y httpd
 # docker ps -qa              ----------------Command will show all container ID
 # docker inspect <container id>   ------------ to get the ip and details of container.
 
+[root@ip-172-31-44-9 ~]# docker run -it --name nginx1 -p 8080:80 --mount type=bind,source=/var/www/html/index.html,target=/usr/share/nginx/html/index.html,readonly -d nginx
+b168fcda72e5bc9103cdddab73ddb7ec6ab7d4b6bc6449f4ff937a8b69fcacd9
+[root@ip-172-31-44-9 ~]# docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS                  NAMES
+b168fcda72e5   nginx     "/docker-entrypoint.…"   3 seconds ago   Up 3 seconds   0.0.0.0:8080->80/tcp   nginx1
+[root@ip-172-31-44-9 ~]#
+[root@ip-172-31-44-9 ~]# docker exec -it b168fcda72e5 bash
+root@b168fcda72e5:/# 
 [root@machine1 dockerbuild]# docker rm -f $(docker ps -q)              ------------------------------ Command to remove the all running container
 6cf3b0320473
 [root@machine1 dockerbuild]#
