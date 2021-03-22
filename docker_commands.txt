@@ -34,6 +34,8 @@ b168fcda72e5bc9103cdddab73ddb7ec6ab7d4b6bc6449f4ff937a8b69fcacd9
 CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS                  NAMES
 b168fcda72e5   nginx     "/docker-entrypoint.…"   3 seconds ago   Up 3 seconds   0.0.0.0:8080->80/tcp   nginx1
 [root@ip-172-31-44-9 ~]#
+--=======>Now any change made to the files in the local directories /var/www/html/index.html on the Docker host are reflected in the directories /usr/share/nginx/html/index.html in the container. The readonly option means file can be changed only on the Docker host, not from within the container.##########
+
 [root@ip-172-31-44-9 ~]# docker exec -it b168fcda72e5 bash
 root@b168fcda72e5:/# 
 [root@machine1 dockerbuild]# docker rm -f $(docker ps -q)              ------------------------------ Command to remove the all running container
