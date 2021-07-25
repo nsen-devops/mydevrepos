@@ -1,0 +1,55 @@
+Installing the DataDogAgent
+Check datadog-agent status:
+ service datadog-agent status
+Apache Installation:
+ sudo yum install -y httpd
+ sudo systemctl status httpd
+ sudo systemctl enable httpd
+ sudo systemctl start httpd
+Configuring Apache for DataDog:
+ cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd_bk.conf
+ vi /etc/httpd/conf/httpd.conf
+Paste the following text in the httpd.conf file
+=================
+<Location /server-status>
+    SetHandler server-status
+    Order Deny,Allow
+    Deny from all
+    Allow from 127.0.0.1
+</Location>
+ExtendedStatus on
+=================
+
+systemctl restart httpd
+curl -kI  http://localhost/server-status
+
+Configuring Data Agent For Apache:
+-----------------------------------
+ mv /etc/datadog-agent/conf.d/apache.d/conf.yaml.example /etc/datadog-agent/conf.d/apache.d/conf.yaml
+ vi /etc/datadog-agent/conf.d/apache.d/conf.yaml
+Logs:
+------
+ vi /etc/datadog-agent/datadog.yaml
+ 
+vi /etc/datadog-agent/conf.d/apache.d/conf.yaml
+---------------------------------------------------
+logs:
+  - type: file
+    path: /var/log/httpd/access_log
+    source: apache
+    sourcecategory: http_web_access
+    service: httpd
+  - type: file
+    path: /var/log/httpd/error_log
+    source: apache
+    sourcecategory: http_web_access
+    service: httpd
+----------------------------------------------------
+Permissions for logs:
+--------------------
+cd /var/log
+chmod 655 -R httpd
+Restart DataDog:
+sudo service datadog-agent restart
+Check the DataDog Status:
+sudo datadog-agent status
