@@ -51,3 +51,13 @@ Linux 9f199b32fc0c 3.10.0-1127.13.1.el7.x86_64 #1 SMP Tue Jun 23 15:46:38 UTC 20
 [root@machine1 ~]# docker rmi d5412d2db438    ------------------Command use to remove the image from the docker
 Deleted: sha256:d5412d2db438f9290fc9ab845e3e54b5e20753a10bd495b0d90921aff9b2ada4
 [root@machine1 ~]#
+######################################################################################################################################################################
+DOCKER SWARM
+# docker swarm init
+# docker swarm join-token <worker|manager>  ## Use worker to get the token for worker node and manager to get the token for manager server
+# docker swarm join --token <token number> ### At worker node, to join the swarm cluster
+# docker node ls
+# docker service create --name=web_server --replicas=5 nginx
+# docker service ps web_server
+# docker service ls
+# docker service update --replicas=8 web_server
