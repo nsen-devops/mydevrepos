@@ -1,4 +1,5 @@
 #!/bin/bash
 echo "Hello my dear friends."
 echo "How are you!"
-
+echo "\n"
+echo ":-)"
