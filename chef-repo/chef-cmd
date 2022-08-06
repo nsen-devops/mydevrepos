@@ -1,0 +1,140 @@
+  124  knife bootstrap 172.31.84.53 -N chef-node --ssh-user ec2-user --sudo -i 398556538634-ec2key.pem
+  125  ls
+  126  cd chef-repo/
+  127  knife bootstrap 172.31.84.53 -N chef-node --ssh-user ec2-user --sudo -i 398556538634-ec2key.pem
+  128  knife bootstrap 172.31.64.244 -N chef-node --ssh-user ec2-user --sudo -i 398556538634-ec2key.pem
+  129  knife bootstrap 172.31.64.244 -N chef-node --ssh-user ec2-user --sudo -i "398556538634-ec2key.pem"
+  130  knife bootstrap 172.31.64.244 -N chef-node --ssh-user ec2-user --sudo -i "/root/398556538634-ec2key.pem"
+  131  ls
+  132  cd
+  133  cd chef-repo/
+  134  ls
+  135  cd cookbooks/
+  136  ls
+  137  cd mypcookbook/
+  138  ls
+  139  ls recipes/
+  140  cat recipes/my-recipe.rb
+  141  cookstyle recipes/my-recipe.rb
+  142  vi recipes/my-recipe.rb
+  143  cookstyle recipes/my-recipe.rb
+  144  chef-client --local-mode --why-run recipes/my-recipe.rb
+  145  chef-client -z recipes/my-recipe.rb
+  146  rpm -qa --last |grep tree
+  147  date
+  148  chef-client recipes/my-recipe.rb
+  149  cat /etc/chef/vali
+  150  cat /etc/chef/
+  151  cd /etc/chef
+  152  ls
+  153  vi /etc/chef/validation.pem
+  154  cd
+  155  cd chef-repo/cookbooks/mypcookbook/
+  156  chef-client recipes/my-recipe.rb
+  157  curl https://localhost:443
+  158  \
+  159  ls
+  160  chef-client
+  161  chef-client -zr "recipe[mypcookbook:my-recipe.rb]"
+  162  cd ..
+  163  chef-client -zr "recipe[mypcookbook:my-recipe.rb]"
+  164  chef-client --local-mode --runlist "recipe[mypcookbook:my-recipe.rb]"
+  165  pwd
+  166  cookstyle mypcookbook/
+  167  cat mypcookbook/recipes/my-recipe.rb
+  168  cat mypcookbook/metadata.rb
+  169  vi mypcookbook/metadata.rb
+  170  cookstyle mypcookbook
+  171  vi mypcookbook/metadata.rb
+  172  cookstyle mypcookbook
+  173  chef-client --local-mode --runlist "recipe[mypcookbook::my-recipe.rb]"
+  174  ls mypcookbook/recipes/
+  175  chef-client --local-mode --runlist "recipe[mypcookbook]"
+  176  chef-client --local-mode --runlist "recipe[mypcookbook::my-recipe.rb]"
+  177  chef-client --local-mode --runlist "recipe[mypcookbook::my-recipe.rb]" --why-run
+  178  cat > mypcookbook/recipes/httpd-recipe.rb
+  179  chef-client --local-mode --runlist "recipe[mypcookbook::httpd-recipe.rb]" --why-run
+  180  chef-client --local-mode --runlist "recipe[mypcookbook::httpd-recipe]" --why-run
+  181  chef-client -zr "recipe[mypcookbook::httpd-recipe]" --why-run
+  182  cd
+  183  ls
+  184  chef generate cookbook demo
+  185  cd demo/
+  186  ls
+  187  cd recipes/
+  188  ls
+  189  vi default.rb
+  190  cd ..
+  191  ls
+  192  cookstyle demo
+  193  chef-client --local-mode --runlist "recipe[demo]" --why-run
+  194  ls
+  195  mkdir cookbooks
+  196  mv demo cookbooks/
+  197  ls
+  198  cd cookbooks/
+  199  chef-client --local-mode --runlist "recipe[demo]" --why-run
+  200  chef-client -zr "recipe[demo]" --why-run
+  201  ls
+  202  cd demo/
+  203  ls
+  204  cd recipes/
+  205  ls
+  206  vi httpd-recipe.rb
+  207  vi httpd-content.rb
+  208  vi httpd-service.rb
+  209  cat httpd-recipe.rb
+  210  vi default.rb
+  211  cat default.rb
+  212  mv httpd-content.rb httpd-file.rb
+  213  cd ..
+  214  cookstyle demo
+  215  chef-client -zr "recipe[demo]" --why-run
+  216  chef-client -zr "recipe[demo]"
+  217  cat demo/
+  218  cat demo/recipes/default.rb
+  219  cd
+  220  ls
+  221  cd chef-
+  222  cd chef-repo/
+  223  ls
+  224  knife ssl check
+  225  ls -la
+  226  ls -la .chef/
+  227  ll
+  228  cd cookbooks/
+  229  ls
+  230  ls -la
+  231  cd ..
+  232  ls -la
+  233  ls cookbooks/
+  234  cd
+  235  knife ssl check
+  236  cd cookbooks/
+  237  knife ssl check
+  238  cd ../
+  239  cd chef-repo/
+  240  knife ssl check
+  241  cd cookbooks/
+  242  ls
+  243  cat mypcookbook/recipes/default.rb
+  244  cp -p /root/cookbooks/demo/ .
+  245  cp -rp /root/cookbooks/demo/ .
+  246  ls
+  247  ls demo/recipes/default.rb
+  248  cat demo/recipes/default.rb
+  249  knife upload demo
+  250  knife cookbook run_list
+  251  knife cookbook list
+  252  jls
+  253  ls
+  254  knife ssh --ssh-user ec2-user -i /root/398556538634-ec2key.pem 'name:chef-node' 'sudo chef-client --why-run'
+  255  ls
+  256  cd demo/
+  257  cd recipes/httpd-file.rb
+  258  vi recipes/httpd-file.rb
+  259  cd ..
+  260  ls
+  261  cookstyle demo
+  262  knife upload demo
+  263  knife ssh --ssh-user ec2-user -i /root/398556538634-ec2key.pem 'name:chef-node' 'sudo chef-client'
