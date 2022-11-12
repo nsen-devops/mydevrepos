@@ -28,3 +28,7 @@ variable "ssh_user_pass" {
   type        = string
   default     = "1"
 }
+variable "s3_bucket_path" {
+  description = "please enter s3 bucket path from copy data to /data directory on instance"
+  type        = string
+}

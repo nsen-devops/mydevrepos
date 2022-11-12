@@ -13,3 +13,4 @@ sudo mkdir -p /data/{bin,dev,etc,lib64,proc}
 sudo cp {/bin/bash,/bin/df,/bin/ls,/bin/grep} /data/bin/
 for i in `ldd /bin/bash /bin/ls /bin/df /bin/grep | grep -wo '[[:alnum:]]*/lib64/[[:alnum:]]*.*' |awk '{print $1}'`; do sudo cp $i /data/lib64/; done
 sudo cp -v /etc/mtab /data/etc/
+sudo aws s3 sync ${s3_bucket_path} /data
