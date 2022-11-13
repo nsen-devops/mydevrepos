@@ -4,6 +4,7 @@ data "template_file" "userdata_temp" {
     jailroot_username = "${var.jailroot_username}"
     ssh_user_pass     = "${var.ssh_user_pass}"
     s3_bucket_path    = "${var.s3_bucket_path}"
+    volume2_size      = "${var.volume2_size}"
   }
 }
 
