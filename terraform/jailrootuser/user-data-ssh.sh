@@ -1,8 +1,8 @@
 #!/bin/bash
 sudo mkdir /data
 sleep 10
-sudo mkfs -t xfs /dev/`lsblk | grep 1G |awk '{print $1}'`
-echo "/dev/`lsblk | grep 1G |awk '{print $1}'` /data xfs defaults,nofail 0 0" >> /etc/fstab
+sudo mkfs -t xfs /dev/`lsblk | grep ${volume2_size} |awk '{print $1}'`
+echo "/dev/`lsblk | grep ${volume2_size} |awk '{print $1}'` /data xfs defaults,nofail 0 0" >> /etc/fstab
 sudo mount -a
 sleep 5
 sudo useradd ${jailroot_username}
